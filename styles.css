@@ -1,0 +1,539 @@
+/* ===== CSS Variables ===== */
+:root {
+    --color-bg: #fafafa;
+    --color-text: #2d2d2d;
+    --color-text-muted: #5a5a5a;
+    --color-accent: #4a7c59;
+    --color-accent-hover: #3d6a4a;
+    --color-border: #e0e0e0;
+    --color-card-bg: #ffffff;
+    --font-main: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition-base: 0.3s ease;
+}
+
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    overflow-x: hidden;
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+a:hover {
+    color: var(--color-accent-hover);
+}
+
+/* ===== Table of Contents (목차) ===== */
+.toc {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    padding: 1.5rem 2rem;
+    min-width: 160px;
+    background: rgba(255, 255, 255, 0.95);
+    border-right: 1px solid var(--color-border);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
+}
+
+.toc-list {
+    list-style: none;
+}
+
+.toc-list li {
+    margin-bottom: 0.75rem;
+}
+
+.toc-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition-base), transform var(--transition-base);
+}
+
+.toc-link:hover {
+    color: var(--color-accent);
+}
+
+.toc-link.active {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+    margin-left: 180px;
+    min-height: 100vh;
+}
+
+/* ===== Scene Base ===== */
+.scene {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* ===== Scene 1: 첫 화면 ===== */
+.scene-1 {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.scene1-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 900px;
+    width: 100%;
+}
+
+.scene1-text {
+    flex: 1;
+}
+
+.name {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+.intro {
+    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+/* Profile Images with Float Animation */
+.scene1-images {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.profile-img-wrapper {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Float Animation - 서로 다른 속도 */
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+@keyframes float-fast {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.float-slow {
+    animation: float-slow 3.5s ease-in-out infinite;
+}
+
+.float-fast {
+    animation: float-fast 2.5s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+/* Fade-in for Scene 1 text */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.intro.fade-in {
+    animation-delay: 0.3s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* ===== Scene 2: 강점 & 약점 ===== */
+.scene-2 {
+    background: var(--color-bg);
+}
+
+.scene2-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+.section-title {
+    font-size: clamp(1.9rem, 3.8vw, 2.4rem);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+}
+
+.scene2-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.strengths-box,
+.weaknesses-box,
+.compensation-box {
+    padding: 1.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-card-bg);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.scene2-grid h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+}
+
+.scene2-grid ul {
+    list-style: none;
+}
+
+.scene2-grid li {
+    padding: 0.3rem 0;
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+}
+
+/* ===== Scene 3: 학습 & 경험 ===== */
+.scene-3 {
+    background: linear-gradient(180deg, var(--color-bg) 0%, #f0f2f5 100%);
+}
+
+.scene3-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+.scene3-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.learning-box,
+.experience-box {
+    padding: 1.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-card-bg);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.scene3-grid h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+}
+
+.scene3-grid ul {
+    list-style: none;
+}
+
+.scene3-grid li {
+    padding: 0.4rem 0;
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+}
+
+.tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-bg);
+}
+
+.tech-item span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.tech-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.tech-extra {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--color-border);
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+}
+
+/* ===== Scene 4: 프로젝트 ===== */
+.scene-4 {
+    background: var(--color-bg);
+}
+
+.scene4-content {
+    max-width: 900px;
+    width: 100%;
+}
+
+.project-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background: var(--color-card-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.project-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.project-card p {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+}
+
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.project-links .btn-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    background: var(--color-accent);
+    color: white !important;
+    border-radius: 4px;
+    transition: background var(--transition-base);
+}
+
+.project-links .btn-link:hover {
+    background: var(--color-accent-hover);
+}
+
+.status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: #e8e8e8;
+    color: var(--color-text-muted);
+    border-radius: 4px;
+}
+
+/* ===== Scene 5: 연락처 ===== */
+.scene-5 {
+    background: #f5f5f5;
+}
+
+.scene5-content {
+    text-align: center;
+    max-width: 500px;
+}
+
+.scene5-content .section-title {
+    margin-bottom: 1.25rem;
+}
+
+.contact-email {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+}
+
+.contact-email a {
+    font-weight: 500;
+}
+
+.contact-phone {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+
+.closing {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+}
+
+/* ===== Responsive: Tablet ===== */
+@media (max-width: 1024px) {
+    .toc {
+        padding: 1.25rem 1.5rem;
+        min-width: 140px;
+    }
+
+    .toc-link {
+        font-size: 1rem;
+    }
+
+    .main-content {
+        margin-left: 160px;
+    }
+
+    .scene2-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .strengths-box,
+    .weaknesses-box,
+    .compensation-box {
+        padding: 1.5rem;
+    }
+
+    .scene3-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .learning-box,
+    .experience-box {
+        padding: 1.5rem;
+    }
+}
+
+/* ===== Responsive: Mobile ===== */
+@media (max-width: 768px) {
+    .toc {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        padding: 0.75rem 1rem;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .toc-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        justify-content: center;
+    }
+
+    .toc-list li {
+        margin-bottom: 0;
+    }
+
+    .toc-link {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.95rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-top: 50px;
+    }
+
+    .scene {
+        scroll-margin-top: 55px;
+    }
+
+    .scene1-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .scene1-text {
+        text-align: center;
+    }
+
+    .scene1-images {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .profile-img-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+
+    .scene {
+        padding: 2rem 1.25rem;
+    }
+}
+
+/* ===== Responsive: Small Mobile ===== */
+@media (max-width: 480px) {
+    .profile-img-wrapper {
+        width: 80px;
+        height: 80px;
+    }
+
+    .scene1-images {
+        gap: 1rem;
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-cards {
+        grid-template-columns: 1fr;
+    }
+}
